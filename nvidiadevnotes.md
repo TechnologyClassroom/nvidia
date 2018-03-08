@@ -56,7 +56,8 @@ workflow...
 
 Use ```xrandr -q``` to find out information about video output.  The plus sign
 ```+``` signifies which display is in use.
-# https://askubuntu.com/questions/186288/
+
+https://askubuntu.com/questions/186288/
 
 ```lshw -numeric -C display```
 
@@ -68,11 +69,11 @@ Use ```xrandr -q``` to find out information about video output.  The plus sign
 
 ```glxinfo | grep OpenGL```
 
-# http://www.binarytides.com/linux-get-gpu-information/
+http://www.binarytides.com/linux-get-gpu-information/
 
 ```lspci -vnnn | perl -lne 'print if /^\d+\:.+(\[\S+\:\S+\])/' | grep VGA```
 
-# ubuntudroid from https://unix.stackexchange.com/questions/16407
+ubuntudroid from https://unix.stackexchange.com/questions/16407
 
 
 # VGA example
