@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# nvidia38490gpu.sh
+# nvidianew.sh
 # Michael McMahon
 # This script installs proprietary NVIDIA drivers 384.98 and CUDA toolkit
 # for GPU video output.
 
 ## Instructions:
 # Run this script with:
-# sudo bash nvidia38469gpu.sh
+# sudo bash nvidianew.sh
 # OR
 # su
-# bash nvidia38469gpu.sh
+# bash nvidianew.sh
 # OR
-# sudo chmod 755 nvidia38469gpu.sh
-# sudo ./nvidia38469gpu.sh
+# sudo chmod 755 nvidianew.sh
+# sudo ./nvidianew.sh
 # OR
 # su
-# chmod 755 nvidia38469gpu.sh
-# ./nvidia38469gpu.sh
+# chmod 755 nvidianew.sh
+# ./nvidianew.sh
 
 # Prerequisites for this script:
 #
