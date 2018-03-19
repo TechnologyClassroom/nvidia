@@ -1,29 +1,28 @@
 #!/bin/bash
 
-# nvidia39025gpu.sh
+# nvidia39042mb.sh
 # Michael McMahon
-# This script installs proprietary NVIDIA drivers 390.25 and CUDA toolkit
-# for GPU video output.
+# This script installs proprietary NVIDIA drivers 390.42 and CUDA toolkit
+# for motherboard video output.
 
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia39025gpu.sh
+# sudo bash nvidia39042mb.sh
 # OR
 # su
-# bash nvidia39025gpu.sh
+# bash nvidia39042mb.sh
 # OR
-# sudo chmod 755 nvidia39025gpu.sh
-# sudo ./nvidia39025gpu.sh
+# sudo chmod 755 nvidia39042mb.sh
+# sudo ./nvidia39042mb.sh
 # OR
 # su
-# chmod 755 nvidia39025gpu.sh
-# ./nvidia39025gpu.sh
+# chmod 755 nvidia39042mb.sh
+# ./nvidia39042mb.sh
 
 # Prerequisites for this script:
 #
-# 0. Change the JPG1 pin to the 2-3 setting for GPU video output.
-#   To disable vga on supermicro boards, the JPG1 pins should be set to 2-3.
+# 0. Change the JPG1 pin to the 1-2 setting for MB video output.
 #
 # 1. Install the system (with Compatibility Libraries and Development Tools or
 # build-essential if applicable)
@@ -49,7 +48,7 @@
 #  yum groups install -y Compatibility\ Libraries
 #
 #  # Debian based systems
-#  sudo apt-get install -y ledmon build-essential
+#  sudo apt install -y ledmon build-essential
 #
 # 4. Boot into the correct runlevel with nomodeset rdblacklist nouveau
 #  Reboot and edit grub temporarily (press arrow keys
@@ -62,7 +61,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia39025.sh
+#  sudo bash nvidia39042mb.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -97,13 +96,12 @@ else
 fi
 
 if [[ $(runlevel | awk '{ print $2 }') -gt 3 ]]; then
-  echo "Runlevel is greater than 3!"
+  echo "Runlevel is greater than 3"
   echo "Reboot and edit grub temporarily (press arrow keys up and down"
   echo "repeatedly during boot)"
   echo "Press 'e' on the top entry to edit temporarily.  Edit the line that"
   echo "starts with linux.  Add these entries around words like 'ro quiet':"
   echo "  nomodeset rdblacklist nouveau 3"
-
   exit 1
 fi
 
@@ -124,26 +122,44 @@ cd /tmp
 echo "This script currently works with GPU video output for"
 echo "RPM or DEB workflows after you have properly booted."
 
-# Downloading Installers
-echo "Downloading proprietary NVIDIA drivers from local ftp..."
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.25.run
-wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run
+# Downloading
+echo "Downloading proprietary NVIDIA drivers from local FTP..."
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.42.run
+# wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.42/NVIDIA-Linux-x86_64-390.42.run
 
-echo "Downloading proprietary CUDA toolkit from local ftp..."
+echo "Downloading proprietary CUDA toolkit from local FTP..."
 date
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
-wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.3_linux.run
+# wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/1/cuda_9.1.85.1_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/2/cuda_9.1.85.2_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/3/cuda_9.1.85.3_linux.run
 date
-
 
 # Installing NVIDIA
-# To learn more about the available switches, run:
-#  sh NVIDIA-Linux-x86_64-XXX.XX.run -A | less
+# To learn more about the available switches, see http://www.manpages.spotlynx.com/gnu_linux/man/nvidia-installer.1 or run:
+#  sh NVIDIA-Linux-x86_64-XXX.XX.run --help
 
 echo "Installing proprietary NVIDIA drivers..."
-# sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X -Z
-sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X -Z --ui=none -s
-echo \ 
+
+echo "Attempting to installing dkms..."
+yum install -y epel-release 2>/dev/null
+yum install -y dkms 2>/dev/null
+yum install -y kernel-devel 2>/dev/null
+dnf install -y dkms 2>/dev/null
+apt-get update 2>/dev/null
+apt-get install -y dkms 2>/dev/null
+
+echo "Installing NVIDIA drivers..."
+# If dkms is not installed, do not use the dkms switch.
+if [[ $(which dkms | wc -l) -gt 0 ]]; then
+  sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q --dkms --no-opengl-files
+else
+  sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q --no-opengl-files
+fi
 
 echo "Warnings about 32 bit libraries are OK."
 echo "If any messages concern you, check the logs at"
@@ -153,7 +169,7 @@ echo \
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close
 # the installer.  Let the cuda install finish.  Manually run the NVIDIA
 # installer.
-#   sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X
+#   sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:
@@ -166,6 +182,13 @@ echo \
 
 echo "Installing proprietary CUDA toolkit..."
 sh cuda_9.1.85_387.26_linux.run --toolkit --silent --override
+# sh cuda_9.0.176_384.81_linux.run --toolkit --silent --override
+
+# Installing CUDA patches
+echo "Installing CUDA patches..."
+sh cuda_9.1.85.1_linux.run --accept-eula -silent
+sh cuda_9.1.85.2_linux.run --accept-eula -silent
+sh cuda_9.1.85.3_linux.run --accept-eula -silent
 
 echo "Adding CUDA to the PATH..."
 if [[ $(cat /etc/bashrc | grep cuda | wc -l) -eq 0 ]] && [ $(ls /etc/bashrc | wc -l) -gt 0 ]; then

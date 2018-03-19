@@ -126,17 +126,11 @@ echo "RPM or DEB workflows after you have properly booted."
 echo "Downloading proprietary NVIDIA drivers..."
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.25.run
 # wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run
-# wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.90/NVIDIA-Linux-x86_64-384.90.run
-# wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.69/NVIDIA-Linux-x86_64-384.69.run
 
 echo "Downloading proprietary CUDA toolkit..."
 date
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
 # wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
-# wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run
-# wget -q https://developer.nvidia.com/compute/cuda/8.0/prod2/local_installers/cuda_8.0.61_375.26_linux-run
-# wget -q https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run
-# wget -q https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda_8.0.61.2_linux-run
 date
 
 # Installing NVIDIA
@@ -166,8 +160,10 @@ echo "If any messages concern you, check the logs at"
 echo "   /var/log/nvidia-installer.log"
 echo \ 
 
-# If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close the installer.  Let the cuda install finish.  Manually run the NVIDIA installer.
-#  sh NVIDIA-Linux-x86_64-384.69.run --accept-license -q -X
+# If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close
+# the installer.  Let the cuda install finish.  Manually run the NVIDIA
+# installer.
+#   sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:
@@ -176,7 +172,7 @@ echo \
 
 # Installing CUDA
 # To learn more about the available switches, run:
-#   sh cuda_8.0.61_375.26_linux-run --help
+#   sh cuda_X.X.XX_XXX.XX_linux-run --help
 
 echo "Installing proprietary CUDA toolkit..."
 sh cuda_9.1.85_387.26_linux.run --toolkit --silent --override

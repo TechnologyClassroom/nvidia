@@ -1,24 +1,24 @@
 #!/bin/bash
 
-# nvidia39025gpu.sh
+# nvidia39042gpu.sh
 # Michael McMahon
-# This script installs proprietary NVIDIA drivers 390.25 and CUDA toolkit
+# This script installs proprietary NVIDIA drivers 390.42 and CUDA toolkit
 # for GPU video output.
 
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia39025gpu.sh
+# sudo bash nvidia39042gpu.sh
 # OR
 # su
-# bash nvidia39025gpu.sh
+# bash nvidia39042gpu.sh
 # OR
-# sudo chmod 755 nvidia39025gpu.sh
-# sudo ./nvidia39025gpu.sh
+# sudo chmod 755 nvidia39042gpu.sh
+# sudo ./nvidia39042gpu.sh
 # OR
 # su
-# chmod 755 nvidia39025gpu.sh
-# ./nvidia39025gpu.sh
+# chmod 755 nvidia39042gpu.sh
+# ./nvidia39042gpu.sh
 
 # Prerequisites for this script:
 #
@@ -62,7 +62,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia39025.sh
+#  sudo bash nvidia39042.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -125,14 +125,20 @@ echo "This script currently works with GPU video output for"
 echo "RPM or DEB workflows after you have properly booted."
 
 # Downloading Installers
-echo "Downloading proprietary NVIDIA drivers from local ftp..."
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.25.run
-wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.25/NVIDIA-Linux-x86_64-390.25.run
+echo "Downloading proprietary NVIDIA drivers from NVIDIA..."
+# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.42.run
+wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.42/NVIDIA-Linux-x86_64-390.42.run
 
-echo "Downloading proprietary CUDA toolkit from local ftp..."
+echo "Downloading proprietary CUDA toolkit from NVIDIA..."
 date
 # wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
+# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
+# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
+# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.3_linux.run
 wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/1/cuda_9.1.85.1_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/2/cuda_9.1.85.2_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/3/cuda_9.1.85.3_linux.run
 date
 
 
@@ -141,8 +147,8 @@ date
 #  sh NVIDIA-Linux-x86_64-XXX.XX.run -A | less
 
 echo "Installing proprietary NVIDIA drivers..."
-# sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X -Z
-sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X -Z --ui=none -s
+# sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q -X -Z
+sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q -X -Z --ui=none -s
 echo \ 
 
 echo "Warnings about 32 bit libraries are OK."
@@ -153,7 +159,7 @@ echo \
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close
 # the installer.  Let the cuda install finish.  Manually run the NVIDIA
 # installer.
-#   sh NVIDIA-Linux-x86_64-390.25.run --accept-license -q -X
+#   sh NVIDIA-Linux-x86_64-390.42.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:
@@ -166,6 +172,12 @@ echo \
 
 echo "Installing proprietary CUDA toolkit..."
 sh cuda_9.1.85_387.26_linux.run --toolkit --silent --override
+
+# Installing CUDA patches
+echo "Installing CUDA patches..."
+sh cuda_9.1.85.1_linux.run --accept-eula -silent
+sh cuda_9.1.85.2_linux.run --accept-eula -silent
+sh cuda_9.1.85.3_linux.run --accept-eula -silent
 
 echo "Adding CUDA to the PATH..."
 if [[ $(cat /etc/bashrc | grep cuda | wc -l) -eq 0 ]] && [ $(ls /etc/bashrc | wc -l) -gt 0 ]; then
