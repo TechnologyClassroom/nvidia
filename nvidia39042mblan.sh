@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# nvidia39042mb.sh
+# nvidia39042mblan.sh
 # Michael McMahon
 # This script installs proprietary NVIDIA drivers 390.42 and CUDA toolkit
 # for motherboard video output.
@@ -8,17 +8,17 @@
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia39042mb.sh
+# sudo bash nvidia39042mblan.sh
 # OR
 # su
-# bash nvidia39042mb.sh
+# bash nvidia39042mblan.sh
 # OR
-# sudo chmod 755 nvidia39042mb.sh
-# sudo ./nvidia39042mb.sh
+# sudo chmod 755 nvidia39042mblan.sh
+# sudo ./nvidia39042mblan.sh
 # OR
 # su
-# chmod 755 nvidia39042mb.sh
-# ./nvidia39042mb.sh
+# chmod 755 nvidia39042mblan.sh
+# ./nvidia39042mblan.sh
 
 # Prerequisites for this script:
 #

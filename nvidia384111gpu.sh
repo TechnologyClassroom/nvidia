@@ -2,23 +2,23 @@
 
 # nvidia384111gpu.sh
 # Michael McMahon
-# This script installs proprietary NVIDIA drivers 384.11 and CUDA toolkit
+# This script installs proprietary NVIDIA drivers 384.111 and CUDA toolkit
 # for GPU video output.
 
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia38469gpu.sh
+# sudo bash nvidia384111gpu.sh
 # OR
 # su
-# bash nvidia38469gpu.sh
+# bash nvidia384111gpu.sh
 # OR
-# sudo chmod 755 nvidia38469gpu.sh
-# sudo ./nvidia38469gpu.sh
+# sudo chmod 755 nvidia384111gpu.sh
+# sudo ./nvidia384111gpu.sh
 # OR
 # su
-# chmod 755 nvidia38469gpu.sh
-# ./nvidia38469gpu.sh
+# chmod 755 nvidia384111gpu.sh
+# ./nvidia384111gpu.sh
 
 # Prerequisites for this script:
 #
@@ -61,7 +61,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia38469.sh
+#  sudo bash nvidia384111.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -130,8 +130,8 @@ echo "Downloading proprietary NVIDIA drivers..."
 wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.111/NVIDIA-Linux-x86_64-384.111.run
 #wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.90/NVIDIA-Linux-x86_64-384.90.run
 #wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.90.run
-#wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.69/NVIDIA-Linux-x86_64-384.69.run
-#wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.69.run
+#wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.111/NVIDIA-Linux-x86_64-384.111.run
+#wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.111.run
 
 echo "Downloading proprietary CUDA toolkit..."
 date
@@ -155,7 +155,7 @@ echo "Installing proprietary NVIDIA drivers..."
 sh NVIDIA-Linux-x86_64-384.111.run --accept-license -q -X -Z --ui=none -s
 
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close the installer.  Let the cuda install finish.  Manually run the NVIDIA installer.
-#  sh NVIDIA-Linux-x86_64-384.69.run --accept-license -q -X
+#  sh NVIDIA-Linux-x86_64-384.111.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:

@@ -61,7 +61,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia384111mb.sh
+#  sudo bash nvidia384.111mb.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -130,8 +130,8 @@ echo "Downloading proprietary NVIDIA drivers..."
 wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.111/NVIDIA-Linux-x86_64-384.111.run
 #wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.90/NVIDIA-Linux-x86_64-384.90.run
 #wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.90.run
-#wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.69/NVIDIA-Linux-x86_64-384.69.run
-#wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.69.run
+#wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/384.111/NVIDIA-Linux-x86_64-384.111.run
+#wget -q ftp://10.12.17.15/pub/utility/nvidia/NVIDIA-Linux-x86_64-384.111.run
 
 echo "Downloading proprietary CUDA toolkit..."
 date
@@ -170,7 +170,7 @@ else
 fi
 
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close the installer.  Let the cuda install finish.  Manually run the NVIDIA installer.
-#  sh NVIDIA-Linux-x86_64-384.69.run --accept-license -q -X
+#  sh NVIDIA-Linux-x86_64-384.111.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:
