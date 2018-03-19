@@ -5,7 +5,7 @@ Wrapper scripts to install proprietary NVIDIA drivers on GNU/Linux systems
 Michael McMahon
 
 The process for installing proprietary NVIDIA drivers is unnecessarily
-complicated across different GNU/Linux operating systems.  This script makes
+complicated across different GNU/Linux operating systems.  These scripts make
 complex installs easier.
 
 Format: ```nvidia (Version) (Video Output)```
@@ -115,7 +115,7 @@ To run these scripts:
 - If nvidia-smi fails to load or all of the video cards are not listed, the
   installer may have ran into a problem.  Check the
   /var/log/nvidia-installer.log file for help and more details.  If you cannot
-  solve, the problem, contact
+  solve the problem, contact
   [NVIDIA support](http://www.nvidia.com/object/support.html).
 - Warnings about missing 32 bit libraries are OK on 64 bit systems.
 - If secure boot is enabled, you may see "ERROR: Unable to load the kernel
