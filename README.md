@@ -1,6 +1,6 @@
 # nvidia
 
-Wrapper scripts to install proprietary NVIDIA drivers on GNU/Linux systems
+Wrapper scripts to install proprietary NVIDIA drivers on GNU/Linux systems.
 
 Michael McMahon
 
@@ -12,6 +12,8 @@ Format: ```nvidia (Version) (Video Output)```
 
 Variations:
 
+- cudaburnin.sh runs gpu_burn for one hour.  This requires one of the other
+  nvidiaXXX scripts to be run first.
 - nvidiaXXX.XXgpu.sh installs NVIDIA drivers and cuda for standard video
   output from the GPU.
 - nvidiaXXX.XXmb.sh installs NVIDIA drivers and cuda for non-standard video
@@ -21,7 +23,8 @@ Variations:
 - nvidiaXXX.XXAAAlan.sh installs from a local FTP server.
 - nvidiafedora26-1.sh DISCONTINUED
 - nvidiafedora26-2.sh DISCONTINUED
-- nvidianew.sh is an unfinished development version for full automation.
+- nvidianew.sh is an unfinished development version for full automation.  (Help
+  wanted)
 
 Compatible operating systems:
 

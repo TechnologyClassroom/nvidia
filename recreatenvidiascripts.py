@@ -5,16 +5,15 @@
 # Example: python3 recreatenvidiascripts 39025 39042
 
 from argparse import ArgumentParser  # Add switch arguments for python 2.7&3.2+
-# from re import
 import fileinput
 from shutil import copy2  # Copy files
 
 # argparse
 # This section adds switch -h and argument to the script.
 parser = ArgumentParser(
-    description='Plot CSV visualizes csv data using matplotlib.')
+    description='Recreate nvidia wrapper scripts for a new version.')
 parser.add_argument('versions', nargs='+', type=str,
-                    help='a csv spreadsheet to be graphed')
+                    help='oldversion, newversion (Do not use periods)')
 args = parser.parse_args()
 
 # Variables
@@ -41,20 +40,12 @@ copy2(OLDF2, NEWF2)
 copy2(OLDF3, NEWF3)
 copy2(OLDF4, NEWF4)
 
-# Syntax replace("OldString", "NewString", "Filename")
-#pysed.replace(OLDV, NEWV, NEWF1)
-#pysed.replace(OLDV, NEWV, NEWF2)
-#pysed.replace(OLDV, NEWV, NEWF3)
-#pysed.replace(OLDV, NEWV, NEWF4)
-#pysed.replace(OLD, NEW, NEWF1)
-#pysed.replace(OLD, NEW, NEWF2)
-#pysed.replace(OLD, NEW, NEWF3)
-#pysed.replace(OLD, NEW, NEWF4)
-
+# Replace all instances of the old version with the new version.
 with fileinput.input(files=(NEWF1, NEWF2, NEWF3, NEWF4), inplace=True) as files:
     for line in files:
         print(line.replace(OLD, NEW), end='')
 
+# Replace all instances of the old version with periods with the new version.
 with fileinput.input(files=(NEWF1, NEWF2, NEWF3, NEWF4), inplace=True) as files:
     for line in files:
         print(line.replace(OLDV, NEWV), end='')
