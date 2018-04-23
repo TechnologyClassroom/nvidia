@@ -118,6 +118,8 @@ To run these scripts:
 - Boot into your GNU/Linux distro with runlevel 2 or 3.
 - Login as root.
 - ```bash nvidia39025gpu.sh```
+- Read the output of the script and look for errors.  ```nvidia-smi``` should
+  run at the end and display all of the NVIDIA cards present.
 - ```reboot```
 - After rebooting, run ```nvidia-smi``` again to ensure the install succeeded.
 
@@ -141,3 +143,6 @@ To run these scripts:
   Debian based systems: ```sudo apt install -y linux-headers-$(uname -r)```
 
   Red Hat based systems: ```yum install -y kernel-devel```
+- Some cards will show up twice in ```nvidia-smi```.
+- If everything seems to be installing correctly and the card does not work, try
+  using a different driver from http://www.nvidia.com/object/unix.html
