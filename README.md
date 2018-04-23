@@ -49,8 +49,16 @@ By using these scripts, you agree to all EULAs presented by NVIDIA.
 
 Prerequisites for this script:
 
-0. Disable secure boot.  On supermicro boards, change the JPG1 pin to the
-   setting that you want.to the 2-3 setting for GPU video output.
+0. Disable secure boot.
+
+   On Supermicro boards, set the JPG1 pin to the 1-2 setting to enable the BIOS
+   to switch between Video Output modes.  In BIOS, set Advanced > PCIe/PCI/PnP
+   Configuration > VGA Priority to either ```Offboard``` for GPU video output or
+   ```Onboard``` for motherboard video output.  Cuda testing shows that
+   ```Offboard``` improves performance slightly with GNU/Linux drivers even if
+   the only GUI is a command shell.  The only time that ```Onboard``` should be
+   used is when the machine will be controlled through IPMI.  This exception to
+   the rule can be avoided by remotely controlling the system through SSH.
 1. Install the system (with Compatibility Libraries and Development Tools or
    build-essential if applicable).
 2. Update all software.

@@ -22,8 +22,11 @@
 
 # Prerequisites for this script:
 #
-# 0. Change the JPG1 pin to the 2-3 setting for GPU video output.
-#   To disable vga on supermicro boards, the JPG1 pins should be set to 2-3.
+# 0. On Supermicro boards, set the JPG1 pin to the 1-2 setting to enable the
+#    BIOS to switch between Video Output modes.
+#
+#    In BIOS, change Advanced > PCIe/PCI/PnP Configuration > VGA Priority from
+#    ```Onboard``` to ```Offboard```.
 #
 # 1. Install the system (with Compatibility Libraries and Development Tools or
 # build-essential if applicable)

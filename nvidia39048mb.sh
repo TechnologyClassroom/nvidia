@@ -22,7 +22,14 @@
 
 # Prerequisites for this script:
 #
-# 0. Change the JPG1 pin to the 1-2 setting for MB video output.
+# 0. On Supermicro boards, set the JPG1 pin to the 1-2 setting to enable the
+#    BIOS to switch between Video Output modes.
+#
+#    In BIOS, make sure Advanced > PCIe/PCI/PnP Configuration > VGA Priority is
+#    set to ```Onboard```.  This option should only be used when remotely
+#    controlling the system over IPMI as CUDA performance suffers compared to
+#    testing with ```Offboard``` and NVIDIA#####gpu.sh driver installation
+#    method.
 #
 # 1. Install the system (with Compatibility Libraries and Development Tools or
 # build-essential if applicable)
