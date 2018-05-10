@@ -136,14 +136,20 @@ wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/390.48/NVIDIA-Linux-x
 
 echo "Downloading proprietary CUDA toolkit from NVIDIA..."
 date
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.3_linux.run
-wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/1/cuda_9.1.85.1_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/2/cuda_9.1.85.2_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/3/cuda_9.1.85.3_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176_384.81_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.1_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.2_linux.run
+wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/1/cuda_9.0.176.1_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.2_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
+#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.3_linux.run
+# wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.1.85_387.26_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/1/cuda_9.1.85.1_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/2/cuda_9.1.85.2_linux.run
+# wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/3/cuda_9.1.85.3_linux.run
 date
 
 # Installing NVIDIA
@@ -187,15 +193,19 @@ echo \
 # To learn more about the available switches, run:
 #   sh cuda_X.X.XX_XXX.XX_linux-run --help
 
+# Installing Cuda 9.0 instead of 9.1 for compatibility with TensorFlow.
+
 echo "Installing proprietary CUDA toolkit..."
-sh cuda_9.1.85_387.26_linux.run --toolkit --silent --override
-# sh cuda_9.0.176_384.81_linux.run --toolkit --silent --override
+sh cuda_9.0.176_384.81_linux.run --toolkit --silent --override
+#sh cuda_9.1.85_387.26_linux.run --toolkit --silent --override
 
 # Installing CUDA patches
 echo "Installing CUDA patches..."
-sh cuda_9.1.85.1_linux.run --accept-eula -silent
-sh cuda_9.1.85.2_linux.run --accept-eula -silent
-sh cuda_9.1.85.3_linux.run --accept-eula -silent
+sh cuda_9.0.176.1_linux.run --accept-eula -silent
+sh cuda_9.0.176.2_linux.run --accept-eula -silent
+#sh cuda_9.1.85.1_linux.run --accept-eula -silent
+#sh cuda_9.1.85.2_linux.run --accept-eula -silent
+#sh cuda_9.1.85.3_linux.run --accept-eula -silent
 
 echo "Adding CUDA to the PATH..."
 if [[ $(cat /etc/bashrc | grep cuda | wc -l) -eq 0 ]] && [ $(ls /etc/bashrc | wc -l) -gt 0 ]; then
