@@ -73,6 +73,10 @@
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
 #
+# If kernel headers are missing, install the kernel headers for your kernel.
+#   Debian based systems: sudo apt install -y linux-headers-$(uname -r)
+#   Red Hat based systems: yum install -y kernel-devel
+#
 
 
 # Initialization checks
