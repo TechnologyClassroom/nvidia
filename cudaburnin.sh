@@ -1,6 +1,8 @@
 # nvidiaburnin.sh
 # Michael McMahon
 # This is a wrapper for gpu_burn.
+
+# build-essential or Development\ Tools are required.
  
 # Make temp directory
 echo "Creating a new work directory in /tmp/gpu..."
@@ -28,7 +30,7 @@ make
 
 # Run one hour test
 echo "Running gpu_burn for a one hour test..."
-echo "Check temperature output.
+echo "Check temperature output."
 ./gpu_burn $((60 * 60))
 
 echo "All GPUs must read OK to pass this test."
