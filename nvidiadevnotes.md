@@ -147,3 +147,29 @@ echo umount /mnt >> /tmp/umsd.sh
 echo reboot >> /tmp/umsd.sh
 sh /tmp/umsd.sh
 ```
+
+## Firmware
+
+Based on https://www.techpowerup.com/244981/nvidia-has-a-displayport-problem-which-only-a-bios-update-can-fix#
+
+An update has been released for DisplayPort 1.3 and 1.4 Displays.  Download the firmware update tool with this command:
+
+```
+wget -q http://us.download.nvidia.com/Windows/uefi/firmware/1.0/NVIDIA_DisplayPort_Firmware_Updater_1.0-x64.exe
+```
+
+Download NVFlash for GNU/Linux.
+
+```
+wget -q http://us2-dl.techpowerup.com/files/aQ27BSdlTc32tRHngOKP-A/1528742513/nvflash_5.414.0_linux.zip
+```
+
+Download NVFlash for Windows 7, 8, and 10.
+
+```
+wget -q http://us2-dl.techpowerup.com/files/jruKWF6V6N-WkYIbY72DBA/1528742523/nvflash_5.449.0.zip
+```
+
+These links were recent as of 2018-06-11.
+
+Firmare should be acquired from your manufacterer or OEM.
