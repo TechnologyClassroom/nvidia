@@ -15,7 +15,8 @@ Variations:
 - cudaburnin.sh runs gpu_burn for one hour.  This requires one of the other
   nvidiaXXX scripts to be run first.
 - nvidiaXXX.XXgpu.sh installs NVIDIA drivers and cuda for standard video
-  output from the GPU.
+  output from the GPU.  Use this as the default even if you are using a compute
+  node.
 - nvidiaXXX.XXmb.sh installs NVIDIA drivers and cuda for non-standard video
   output from the motherboard.  This is only useful if you have to use VGA
   output for IPMI remote management.  cuda performance takes a small hit.  This
@@ -117,7 +118,8 @@ To run these scripts:
 
 - Boot into your GNU/Linux distro with runlevel 2 or 3.
 - Login as root.
-- ```bash nvidia39025gpu.sh```
+- Download the script and change to its directory.
+- ```bash nvidia39087gpu.sh```
 - Read the output of the script and look for errors.  ```nvidia-smi``` should
   run at the end and display all of the NVIDIA cards present.
 - ```reboot```

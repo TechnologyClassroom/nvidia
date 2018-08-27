@@ -142,6 +142,7 @@ wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176_384.81_l
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.1_linux.run
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.2_linux.run
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.3_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.4_linux.run
 #wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run
 #wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/1/cuda_9.0.176.1_linux.run
 #wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.2_linux.run
@@ -162,9 +163,22 @@ date
 # To learn more about the available switches, run:
 #  sh NVIDIA-Linux-x86_64-XXX.XX.run -A | less
 
+echo "Attempting to installing dkms..."
+yum install -y epel-release 2>/dev/null
+yum install -y dkms 2>/dev/null
+yum install -y kernel-devel 2>/dev/null
+dnf install -y dkms 2>/dev/null
+apt-get update 2>/dev/null
+apt-get install -y dkms 2>/dev/null
+
 echo "Installing proprietary NVIDIA drivers..."
-# sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q -X -Z
-sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q -X -Z --ui=none -s
+# If dkms is not installed, do not use the dkms switch.
+if [[ $(which dkms | wc -l) -gt 0 ]]; then
+  sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q --dkms -X -Z --ui=none -s
+else
+  sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q -X -Z --ui=none -s
+  # sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q -X -Z
+fi
 echo \ 
 
 echo "Warnings about 32 bit libraries are OK."
@@ -197,6 +211,7 @@ echo "Installing CUDA patches..."
 sh cuda_9.0.176.1_linux.run --accept-eula -silent
 sh cuda_9.0.176.2_linux.run --accept-eula -silent
 sh cuda_9.0.176.3_linux.run --accept-eula -silent
+sh cuda_9.0.176.4_linux.run --accept-eula -silent
 #sh cuda_9.1.85.1_linux.run --accept-eula -silent
 #sh cuda_9.1.85.2_linux.run --accept-eula -silent
 #sh cuda_9.1.85.3_linux.run --accept-eula -silent

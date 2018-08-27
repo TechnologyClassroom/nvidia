@@ -147,6 +147,7 @@ wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local
 wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/1/cuda_9.0.176.1_linux.run
 wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.2_linux.run
 wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.3_linux.run
+wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.4_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
@@ -171,13 +172,14 @@ dnf install -y dkms 2>/dev/null
 apt-get update 2>/dev/null
 apt-get install -y dkms 2>/dev/null
 
-echo "Installing NVIDIA drivers..."
+echo "Installing proprietary NVIDIA drivers..."
 # If dkms is not installed, do not use the dkms switch.
 if [[ $(which dkms | wc -l) -gt 0 ]]; then
   sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q --dkms --no-opengl-files
 else
   sh NVIDIA-Linux-x86_64-390.77.run --accept-license -q --no-opengl-files
 fi
+echo \ 
 
 echo "Warnings about 32 bit libraries are OK."
 echo "If any messages concern you, check the logs at"
@@ -209,6 +211,7 @@ echo "Installing CUDA patches..."
 sh cuda_9.0.176.1_linux.run --accept-eula -silent
 sh cuda_9.0.176.2_linux.run --accept-eula -silent
 sh cuda_9.0.176.3_linux.run --accept-eula -silent
+sh cuda_9.0.176.4_linux.run --accept-eula -silent
 #sh cuda_9.1.85.1_linux.run --accept-eula -silent
 #sh cuda_9.1.85.2_linux.run --accept-eula -silent
 #sh cuda_9.1.85.3_linux.run --accept-eula -silent
