@@ -139,7 +139,7 @@ wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-390.87
 echo "Downloading proprietary CUDA toolkit from local ftp..."
 date
 wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_8.0.61_375.26_linux.run
-wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_8.0.61.2_linux
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_8.0.61.2_linux.run
 #wget -q https://developer.download.nvidia.com/compute/cuda/8.0/secure/Prod2/local_installers/cuda_8.0.61_375.26_linux.run
 #wget -q https://developer.download.nvidia.com/compute/cuda/8.0/secure/Prod2/patches/2/cuda_8.0.61.2_linux.run
 date
