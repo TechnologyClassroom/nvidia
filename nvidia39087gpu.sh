@@ -228,6 +228,13 @@ if [[ $(cat /etc/default/grub | grep cuda | wc -l) -eq 0 ]]; then
   echo /usr/local/cuda/lib >> /etc/ld.so.conf
 fi
 
+if [[ $(cat /etc/udev/rules.d/98-nvstusb.rules | wc -l) -eq 0 ]]; then
+  echo "Creating udev rules for 3D Vision USB IR emitter..."
+  echo "# NVIDIA 3D Vision USB IR Emitter" > /etc/udev/rules.d/98-nvstusb.rules
+  echo "# From http://users.csc.calpoly.edu/~zwood/teaching/csc572/final11/rsomers/" >> /etc/udev/rules.d/98-nvstusb.rules
+  echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0955", ATTR{idProduct}=="7003", MODE="0666"' >> /etc/udev/rules.d/98-nvstusb.rules
+fi
+
 echo "Blacklisting nouveau driver..."
 if [[ $(cat /etc/modprobe.d/blacklist.conf | grep nouveau | wc -l) -eq 0 ]]; then
   echo blacklist nouveau >> /etc/modprobe.d/blacklist.conf
