@@ -22,12 +22,6 @@
 
 # Prerequisites for this script:
 #
-# 0. On Supermicro boards, set the JPG1 pin to the 1-2 setting to enable the
-#    BIOS to switch between Video Output modes.
-#
-#    In BIOS, change Advanced > PCIe/PCI/PnP Configuration > VGA Priority from
-#    ```Onboard``` to ```Offboard```.
-#
 # 1. Install the system (with Compatibility Libraries and Development Tools or
 # build-essential if applicable)
 #
@@ -65,7 +59,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia41073.sh
+#  sudo bash nvidia41073gpu.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -82,7 +76,7 @@
 if [ "$BASH_VERSION" = '' ]; then
   echo "You are not using bash."
   echo "Use this syntax instead:"
-  echo "sudo bash nvidia.sh"
+  echo "sudo bash nvidia41073gpu.sh"
   exit 1
 fi
 

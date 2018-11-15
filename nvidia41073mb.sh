@@ -85,7 +85,7 @@
 if [ "$BASH_VERSION" = '' ]; then
   echo "You are not using bash."
   echo "Use this syntax instead:"
-  echo "sudo bash nvidia.sh"
+  echo "sudo bash nvidia41073mb.sh"
   exit 1
 fi
 
