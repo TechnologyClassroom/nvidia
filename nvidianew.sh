@@ -21,15 +21,12 @@
 
 # Prerequisites for this script:
 #
-# 0. Change the JPG1 pin to the 2-3 setting for GPU video output.
-#   To disable vga on supermicro boards, the JPG1 pins should be set to 2-3.
-#
-# 5. Run this script as root.
+# 1. Run this script as root.
 #  bash nvidianew.sh
 #  OR
 #  sudo bash nvidianew.sh
 #
-# 6. Verify that all cards are working by running:
+# 2. Reboot and verify that all cards are working by running:
 #  nvidia-smi
 #
 
@@ -63,10 +60,8 @@ else
 fi
 
 if [[ $(runlevel | awk '{ print $2 }') -gt 3 ]]; then
-  echo "Runlevel is greater than 3"
-  echo "Reboot and edit grub temporarily (press arrow keys up and down repeatedly during boot)"
-  echo "Press 'e' on the top entry to edit temporarily.  Edit the line that starts with linux.  Add these entries around words like 'ro quiet':"
-  echo "nomodeset rdblacklist nouveau 3"
+  echo "Runlevel is greater than 3."
+  echo "Starting the machine will need to reboot after initial work."
 
   echo "Creating boot hook..."
 #  cat << EOF > /etc/systemd/system/nvidiainstall.service
