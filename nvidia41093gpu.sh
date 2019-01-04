@@ -1,24 +1,24 @@
 #!/bin/bash
 
-# nvidia41097gpu.sh
+# nvidia41093gpu.sh
 # Michael McMahon
-# This script installs proprietary NVIDIA drivers 410.97 and CUDA toolkit
+# This script installs proprietary NVIDIA drivers 410.93 and CUDA toolkit
 # for GPU video output.
 
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia41097gpu.sh
+# sudo bash nvidia41093gpu.sh
 # OR
 # su
-# bash nvidia41097gpu.sh
+# bash nvidia41093gpu.sh
 # OR
-# sudo chmod 755 nvidia41097gpu.sh
-# sudo ./nvidia41097gpu.sh
+# sudo chmod 755 nvidia41093gpu.sh
+# sudo ./nvidia41093gpu.sh
 # OR
 # su
-# chmod 755 nvidia41097gpu.sh
-# ./nvidia41097gpu.sh
+# chmod 755 nvidia41093gpu.sh
+# ./nvidia41093gpu.sh
 
 # Prerequisites for this script:
 #
@@ -59,7 +59,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia41097gpu.sh
+#  sudo bash nvidia41093gpu.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -76,7 +76,7 @@
 if [ "$BASH_VERSION" = '' ]; then
   echo "You are not using bash."
   echo "Use this syntax instead:"
-  echo "sudo bash nvidia41097gpu.sh"
+  echo "sudo bash nvidia41093gpu.sh"
   exit 1
 fi
 
@@ -127,8 +127,8 @@ echo "RPM or DEB workflows after you have properly booted."
 
 # Downloading Installers
 echo "Downloading proprietary NVIDIA drivers from NVIDIA..."
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-410.97.run
-wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/410.97/NVIDIA-Linux-x86_64-410.97.run
+# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-410.93.run
+wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/410.93/NVIDIA-Linux-x86_64-410.93.run
 
 echo "Downloading proprietary CUDA toolkit from NVIDIA..."
 date
@@ -166,10 +166,10 @@ apt-get install -y dkms 2>/dev/null
 echo "Installing proprietary NVIDIA drivers..."
 # If dkms is not installed, do not use the dkms switch.
 if [[ $(which dkms | wc -l) -gt 0 ]]; then
-  sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q --dkms -X -Z --ui=none -s
+  sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q --dkms -X -Z --ui=none -s
 else
-  sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q -X -Z --ui=none -s
-  # sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q -X -Z
+  sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X -Z --ui=none -s
+  # sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X -Z
 fi
 echo \ 
 
@@ -181,7 +181,7 @@ echo \
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close
 # the installer.  Let the cuda install finish.  Manually run the NVIDIA
 # installer.
-#   sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q -X
+#   sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:

@@ -1,35 +1,26 @@
 #!/bin/bash
 
-# nvidia41097mb.sh
+# nvidia41093gpulan.sh
 # Michael McMahon
-# This script installs proprietary NVIDIA drivers 410.97 and CUDA toolkit
-# for motherboard video output.
+# This script installs proprietary NVIDIA drivers 410.93 and CUDA toolkit
+# for GPU video output.
 
 # To run this script, boot into your GNU/Linux distro with runlevel 2 or 3.
 # Follow these instructions:
 # Run this script with:
-# sudo bash nvidia41097mb.sh
+# sudo bash nvidia41093gpulan.sh
 # OR
 # su
-# bash nvidia41097mb.sh
+# bash nvidia41093gpulan.sh
 # OR
-# sudo chmod 755 nvidia41097mb.sh
-# sudo ./nvidia41097mb.sh
+# sudo chmod 755 nvidia41093gpulan.sh
+# sudo ./nvidia41093gpulan.sh
 # OR
 # su
-# chmod 755 nvidia41097mb.sh
-# ./nvidia41097mb.sh
+# chmod 755 nvidia41093gpulan.sh
+# ./nvidia41093gpulan.sh
 
 # Prerequisites for this script:
-#
-# 0. On Supermicro boards, set the JPG1 pin to the 1-2 setting to enable the
-#    BIOS to switch between Video Output modes.
-#
-#    In BIOS, make sure Advanced > PCIe/PCI/PnP Configuration > VGA Priority is
-#    set to ```Onboard```.  This option should only be used when remotely
-#    controlling the system over IPMI as CUDA performance suffers compared to
-#    testing with ```Offboard``` and NVIDIA#####gpu.sh driver installation
-#    method.
 #
 # 1. Install the system (with Compatibility Libraries and Development Tools or
 # build-essential if applicable)
@@ -55,7 +46,7 @@
 #  yum groups install -y Compatibility\ Libraries
 #
 #  # Debian based systems
-#  sudo apt install -y ledmon build-essential
+#  sudo apt-get install -y ledmon build-essential
 #
 # 4. Boot into the correct runlevel with nomodeset rdblacklist nouveau
 #  Reboot and edit grub temporarily (press arrow keys
@@ -68,7 +59,7 @@
 #    nomodeset rdblacklist nouveau 2 text
 #
 # 5. Run this script.
-#  sudo bash nvidia41097mb.sh
+#  sudo bash nvidia41093gpulan.sh
 #
 # 6. Reboot and verify that all cards are working by running:
 #  nvidia-smi
@@ -85,18 +76,18 @@
 if [ "$BASH_VERSION" = '' ]; then
   echo "You are not using bash."
   echo "Use this syntax instead:"
-  echo "sudo bash nvidia41097mb.sh"
+  echo "sudo bash nvidia41093gpulan.sh"
   exit 1
 fi
 
 # Check for root.
 if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run as root!"
+  echo "This script must be run as root."
   exit 1
 fi
 
 # Check networking
-# https://unix.stackexchange.com/questions/190513
+# https://unix.stackexchange.com/questions/190513/
 echo Checking network...
 if ping -q -c 1 -W 1 google.com >/dev/null; then
   echo "The network is up."
@@ -107,12 +98,13 @@ else
 fi
 
 if [[ $(runlevel | awk '{ print $2 }') -gt 3 ]]; then
-  echo "Runlevel is greater than 3"
+  echo "Runlevel is greater than 3!"
   echo "Reboot and edit grub temporarily (press arrow keys up and down"
   echo "repeatedly during boot)"
   echo "Press 'e' on the top entry to edit temporarily.  Edit the line that"
   echo "starts with linux.  Add these entries around words like 'ro quiet':"
   echo "  nomodeset rdblacklist nouveau 3"
+
   exit 1
 fi
 
@@ -133,21 +125,21 @@ cd /tmp
 echo "This script currently works with GPU video output for"
 echo "RPM or DEB workflows after you have properly booted."
 
-# Downloading
-echo "Downloading proprietary NVIDIA drivers from NVIDIA..."
-# wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-410.97.run
-wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/410.97/NVIDIA-Linux-x86_64-410.97.run
+# Downloading Installers
+echo "Downloading proprietary NVIDIA drivers from local ftp..."
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/NVIDIA-Linux-x86_64-410.93.run
+# wget -q http://us.download.nvidia.com/XFree86/Linux-x86_64/410.93/NVIDIA-Linux-x86_64-410.93.run
 
-echo "Downloading proprietary CUDA toolkit from NVIDIA..."
+echo "Downloading proprietary CUDA toolkit from local ftp..."
 date
-#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176_384.81_linux.run
-#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.1_linux.run
-#wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.2_linux.run
-wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/1/cuda_9.0.176.1_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.2_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.3_linux.run
-wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.4_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176_384.81_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.1_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.2_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.3_linux.run
+wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.0.176.4_linux.run
+#wget -q http://developer2.download.nvidia.com/compute/cuda/9.0/secure/Prod/local_installers/cuda_9.0.176_384.81_linux.run
+#wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/1/cuda_9.0.176.1_linux.run
+#wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patches/2/cuda_9.0.176.2_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85_387.26_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.1_linux.run
 #wget -q ftp://10.12.17.15/pub/software/drivers/nvidia/cuda/cuda_9.1.85.2_linux.run
@@ -156,13 +148,14 @@ wget -q http://developer.download.nvidia.com/compute/cuda/9.0/secure/Prod/patche
 # wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/1/cuda_9.1.85.1_linux.run
 # wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/2/cuda_9.1.85.2_linux.run
 # wget -q http://developer.download.nvidia.com/compute/cuda/9.1/secure/Prod/patches/3/cuda_9.1.85.3_linux.run
+# wget -q https://developer.download.nvidia.com/compute/cuda/9.2/secure/Prod/local_installers/cuda_9.2.88_396.26_linux.run
+# wget -q https://developer.download.nvidia.com/compute/cuda/9.2/secure/Prod/patches/1/cuda_9.2.88.1_linux.run
 date
 
-# Installing NVIDIA
-# To learn more about the available switches, see http://www.manpages.spotlynx.com/gnu_linux/man/nvidia-installer.1 or run:
-#  sh NVIDIA-Linux-x86_64-XXX.XX.run --help
 
-echo "Installing proprietary NVIDIA drivers..."
+# Installing NVIDIA
+# To learn more about the available switches, run:
+#  sh NVIDIA-Linux-x86_64-XXX.XX.run -A | less
 
 echo "Attempting to installing dkms..."
 yum install -y epel-release 2>/dev/null
@@ -175,9 +168,10 @@ apt-get install -y dkms 2>/dev/null
 echo "Installing proprietary NVIDIA drivers..."
 # If dkms is not installed, do not use the dkms switch.
 if [[ $(which dkms | wc -l) -gt 0 ]]; then
-  sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q --dkms --no-opengl-files
+  sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q --dkms -X -Z --ui=none -s
 else
-  sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q --no-opengl-files
+  sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X -Z --ui=none -s
+  # sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X -Z
 fi
 echo \ 
 
@@ -189,7 +183,7 @@ echo \
 # If RPM based distro 6.x, the NVIDIA installer will fail.  Use CTRL+C to close
 # the installer.  Let the cuda install finish.  Manually run the NVIDIA
 # installer.
-#   sh NVIDIA-Linux-x86_64-410.97.run --accept-license -q -X
+#   sh NVIDIA-Linux-x86_64-410.93.run --accept-license -q -X
 
 # To update NVIDIA drivers on a system that already has proprietary NVIDIA
 # drivers, use:
